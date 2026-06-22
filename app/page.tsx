@@ -311,6 +311,15 @@ export default function Home() {
     }
 
     for (let item of inputSections) {
+      for (let key in item) {
+        if (item[key] === undefined || item[key] === '') {
+          setWorkerJobs([]);
+          setIsError(true);
+          console.log(key, item[key]);
+          setErrorMessage('Есть незаполненные данные по докам');
+          return;
+        }
+      }
       const weightSum = item.kind === Kind.PEP ? (item.weight * tarif.pepWeight) : (item.weight * tarif.prodWeight);
       const salary = weightSum + item.picksNumber * tarif.picks;
       item.salary = salary;

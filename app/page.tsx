@@ -312,7 +312,7 @@ export default function Home() {
 
     for (let item of inputSections) {
       for (let key in item) {
-        if (item[key] === undefined || item[key] === '') {
+        if (item[key as keyof typeof item] === undefined || item[key as keyof typeof item] === '') {
           setWorkerJobs([]);
           setIsError(true);
           console.log(key, item[key]);

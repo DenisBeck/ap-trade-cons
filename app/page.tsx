@@ -292,16 +292,19 @@ export default function Home() {
     setIsError(false);
 
     if (!inputSections.length) {
+      setWorkerJobs([]);
       setIsError(true);
       setErrorMessage('Не указано ни одного дока');
       return;
     }
     if (!workersNumber) {
+      setWorkerJobs([]);
       setIsError(true);
       setErrorMessage('Не указано число работников');
       return;
     }
     if (!tarif.picks || !tarif.prodWeight || !tarif.pepWeight) {
+      setWorkerJobs([]);
       setIsError(true);
       setErrorMessage('Не указаны данные о тарифах');
       return;

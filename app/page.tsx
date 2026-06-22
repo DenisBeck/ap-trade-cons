@@ -315,7 +315,6 @@ export default function Home() {
         if (item[key as keyof typeof item] === undefined || item[key as keyof typeof item] === '') {
           setWorkerJobs([]);
           setIsError(true);
-          console.log(key, item[key]);
           setErrorMessage('Есть незаполненные данные по докам');
           return;
         }

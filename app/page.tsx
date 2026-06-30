@@ -328,7 +328,6 @@ export default function Home() {
     setAveragePicks(() => inputSections.reduce((sum, item) => sum + item.picksNumber, 0) / workersNumber);
     setAverageWeight(() => inputSections.reduce((sum, item) => {
       sum += item.weight;
-      console.log(sum);
       return sum;
     }, 0) / workersNumber);
 
@@ -363,9 +362,8 @@ export default function Home() {
         updatedJob1.docks = updatedJob1?.docks.filter(item => item.id != activeDndItemId) || [];
         updatedJob1.salary = updatedJob1.docks.reduce((sum, item) => sum + item.salary, 0);
         updatedJob1.picks = updatedJob1.docks.reduce((sum, item) => sum + item.picksNumber, 0);
-        updatedJob1.pepWeight = updatedJob1.docks.reduce((sum, item) => sum + item.kind === Kind.PEP ? item.salary : 0, 0);
-        updatedJob1.notPepWeight = updatedJob1.docks.reduce((sum, item) => sum + item.kind !== Kind.PEP ? item.salary : 0, 0);
-        
+        updatedJob1.pepWeight = updatedJob1.docks.reduce((sum, item) => sum + (item.kind === Kind.PEP ? item.weight : 0), 0);
+        updatedJob1.notPepWeight = updatedJob1.docks.reduce((sum, item) => sum + (item.kind !== Kind.PEP ? item.weight : 0), 0);
       }
       
       const updatedJob2 = jobs.find(item => item.id === overRowId);
@@ -375,9 +373,8 @@ export default function Home() {
         }
         updatedJob2.salary = updatedJob2.docks.reduce((sum, item) => sum + item.salary, 0);
         updatedJob2.picks = updatedJob2.docks.reduce((sum, item) => sum + item.picksNumber, 0);
-        updatedJob2.pepWeight = updatedJob2.docks.reduce((sum, item) => sum + item.kind === Kind.PEP ? item.salary : 0, 0);
-        updatedJob2.notPepWeight = updatedJob2.docks.reduce((sum, item) => sum + item.kind !== Kind.PEP ? item.salary : 0, 0);
-        
+        updatedJob2.pepWeight = updatedJob2.docks.reduce((sum, item) => sum + (item.kind === Kind.PEP ? item.weight : 0), 0);
+        updatedJob2.notPepWeight = updatedJob2.docks.reduce((sum, item) => sum + (item.kind !== Kind.PEP ? item.weight : 0), 0);
       }
       if (updatedJob1 && updatedJob2) {
         return [...jobs.filter(item => (item.id !== overRowId && item.id !== activeRowId)), updatedJob1, updatedJob2].toSorted((a, b) => a.id - b.id);
